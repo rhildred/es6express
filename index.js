@@ -12,19 +12,6 @@ app.get("/users/:uname", (req, res) => {
     res.end("Hello " + req.params.uname);
 });
 
-let oGames = {};
-app.post("/sms", (req, res) =>{
-    let sFrom = req.body.From;
-    if(!oGames.hasOwnProperty(sFrom)){
-        oGames[sFrom] = new Game();
-    }    
-    let sReply = oGames[sFrom].makeAMove(req.body.Body);
-
-    res.end("<Response><Message>" + 
-    sReply + "</Message></Response>");
-
-});
-
 var port = process.env.PORT || parseInt(process.argv.pop()) || 3000;
 
 app.listen(port, () => console.log('Example app listening on port ' + port + '!'));
